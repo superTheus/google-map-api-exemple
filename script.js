@@ -29,10 +29,20 @@ function initMap() {
         title: 'Loja 1'
       });
     }, function () {
-      console.error("Não foi possível obter a localização do usuário.");
+      document.getElementById('error').style.color = '#e52330'
+      document.getElementById('error').style.display = 'block'
+      document.getElementById('error').innerText = 'Não foi possível obter a localização do usuário.'
+      setTimeout(() => {
+        resetMessage()
+      }, 10000);
     });
   } else {
-    console.error("Geolocalização não suportada pelo navegador.");
+    document.getElementById('error').style.color = '#e52330'
+    document.getElementById('error').style.display = 'block'
+    document.getElementById('error').innerText = 'Geolocalização não suportada pelo navegador.'
+    setTimeout(() => {
+      resetMessage()
+    }, 10000);
   }
 }
 
@@ -54,8 +64,25 @@ function buscarEnderecoPorCep() {
         title: 'Endereço Encontrado'
       });
 
+      document.getElementById('error').style.color = '#4CAF50'
+      document.getElementById('error').style.display = 'block'
+      document.getElementById('error').innerText = 'CEP encontrado com sucesso'
+      setTimeout(() => {
+        resetMessage()
+      }, 5000);
     } else {
-      console.error('Não foi possível encontrar o endereço para o CEP fornecido.');
+      document.getElementById('error').style.color = '#e52330'
+      document.getElementById('error').style.display = 'block'
+      document.getElementById('error').innerText = 'Não foi possível encontrar o endereço para o CEP fornecido.'
+      setTimeout(() => {
+        resetMessage()
+      }, 5000);
     }
   });
+
+  function resetMessage() {
+    document.getElementById('error').style.color = '#e52330'
+    document.getElementById('error').style.display = 'none'
+    document.getElementById('error').innerText = ''
+  }
 }
